@@ -39,7 +39,10 @@ Viral genomes were retrieved from NCBI and â€œThe Actinobacteriophage Databaseâ€
    5.2 Plot individual species
    
    5.3 Plot all species together after normalizing the data to 150 pairs per species
+
    
-![alt text](https://github.com/baldeguer-riquelme/Viral-ANI-gap/blob/main/.figure/Figure1.tiff)
+![alt text](https://github.com/baldeguer-riquelme/Viral-ANI-gap/blob/main/.figure/Figure1.png)
+
+
 
 Plots for each species can be found in folders "Plots_prokaryotic_viruses", "Plots_eukaryotic_viruses", "Plots_fosmid_viruses" and "Plots_long_read_viruses"
