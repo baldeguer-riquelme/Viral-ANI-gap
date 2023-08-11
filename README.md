@@ -32,7 +32,7 @@ Viral genomes were retrieved from NCBI and â€œThe Actinobacteriophage Databaseâ€
    
 
 
-5. The script "Plot_ANI_vs_Perc_shared_genome.R") was then used to represent the ANI vs percentage of shared genome for species with more than 20 or 10 genomes for cultured and uncultured viral species, respectively. The script does the following steps:
+5. The script "Plot_ANI_vs_Perc_shared_genome.R" was then used to represent the ANI vs percentage of shared genome for species with more than 20 or 10 genomes for cultured and uncultured viral species, respectively. The script does the following steps:
    
    5.1 Filter species with insufficient number of genomes
    
