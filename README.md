@@ -28,7 +28,7 @@ Viral genomes were retrieved from NCBI and â€œThe Actinobacteriophage Databaseâ€
    
    4.3 Remove self-hits.
    
-   4.4 Write output named ani_table_final_sp_included.txt
+   4.4 Write output named "ani_table_final_sp_included.txt"
    
 
 
