@@ -68,3 +68,4 @@ The random selection was used to subset to all genomes (with or without Ns) and 
 
 Selected sequences were then filtered using the "FastA.filter.pl" script from enveomics (http://enve-omics.ce.gatech.edu/enveomics/) and then, the general procedure explained above was followed. However, in this case, on step 5, instead of the script "Plot_ANI_vs_Perc_shared_genome.R", the script "Processing_script_ncbi_Sars-Cov2_CDC_USA" was employed to plot histograms with and without the variant data.
 
+![alt text](https://github.com/baldeguer-riquelme/Viral-ANI-gap/blob/main/.figure/Histogram_Sars-CoV-2_variants.png)
