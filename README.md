@@ -63,9 +63,9 @@ SARS-CoV-2 genomes were downloaded from NCBI as well as their associated metadat
 4. write a file with the metadata associated with the randomly selected genomes.
 
 
-This procedure of random selection was used to subset all genomes (with or without Ns) and only the good quality genomes (no Ns, identified previously by FastA.filterN.pl from the enveomics collection: http://enve-omics.ce.gatech.edu/enveomics/).
+This procedure of random selection was used to subset all genomes (with or without Ns) as well as the good quality genomes (no Ns, identified previously by FastA.filterN.pl from the enveomics collection: http://enve-omics.ce.gatech.edu/enveomics/).
 
 
-Selected sequences were then extracted from the complete data set using the "FastA.filter.pl" script from enveomics (http://enve-omics.ce.gatech.edu/enveomics/) and then, the general procedure explained above was followed. However, in this case, on step 5, instead of the script "Plot_ANI_vs_Perc_shared_genome.R", the script "Processing_script_ncbi_Sars-Cov2_CDC_USA" was employed to plot histograms with and without the variant data.
+Selected sequences were then extracted from the complete data set using the "FastA.filter.pl" script from enveomics (http://enve-omics.ce.gatech.edu/enveomics/) and then, the general procedure explained above was followed. However, in this case, on step 5, instead of the script "Plot_ANI_vs_Perc_shared_genome.R", the script "Processing_script_ncbi_Sars-Cov2_CDC_USA.R" was employed to plot histograms with and without the variant data and to calculate the percentage of comparisons between the same or different genomovar above and below the ANI gap.
 
 ![alt text](https://github.com/baldeguer-riquelme/Viral-ANI-gap/blob/main/.figure/Histogram_Sars-CoV-2_variants.png)
