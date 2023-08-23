@@ -52,7 +52,7 @@ Plots for each species can be found in folders "Plots_prokaryotic_viruses", "Plo
 
 
 ### SARS-CoV-2
-SARS-CoV-2 genomes were downloaded from NCBI as well as their associated metadata. Since the amount of genomes is too big to be analyzed, a subset of sequences were selected using the script "SARS-CoV-2_select_genomes". This script was used to:
+SARS-CoV-2 genomes were downloaded from NCBI as well as their associated metadata. Since the amount of genomes is too big, a subset of sequences were selected using the script "SARS-CoV-2_select_genomes". This script was used to:
 
 1. identify the main submitting organizations, that were the Center for Disease Control (CDC) in the USA and the Robert-Koch-Institute in Germany.
      
