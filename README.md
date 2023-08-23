@@ -49,20 +49,22 @@ Plots for each species can be found in folders "Plots_prokaryotic_viruses", "Plo
 
 
 
+
+
 ### SARS-CoV-2
 SARS-CoV-2 genomes were downloaded from NCBI as well as their associated metadata. Since the amount of genomes is huge, a subset was selected to perform the analyses using the script "SARS-CoV-2_select_genomes". This script was used to:
 
-     1. identify the main submitting organizations that were the Center for Disease Control (CDC) in the USA and the Robert-Koch-Institute in Germany.
+1. identify the main submitting organizations that were the Center for Disease Control (CDC) in the USA and the Robert-Koch-Institute in Germany.
      
-     2. randomly select a given number of genomes of each Variant of Concern (Alpha, Beta, Delta, Gamma, Epsilon and Omicron)
+2. randomly select a given number of genomes of each Variant of Concern (Alpha, Beta, Delta, Gamma, Epsilon and Omicron)
      
-     3. write a file with the randomly selected genome ids
+3. write a file with the randomly selected genome ids
      
-     4. write a file with the metadata associated with the randomly selected genomes
+4. write a file with the metadata associated with the randomly selected genomes
 
 
-The selection was applied to all genomes (with or without Ns) and only to the good quality genomes (no Ns, identified previously by FastA.filterN.pl from the enveomics collection: http://enve-omics.ce.gatech.edu/enveomics/).
+The random selection was used to subset to all genomes (with or without Ns) and only the good quality genomes (no Ns, identified previously by FastA.filterN.pl from the enveomics collection: http://enve-omics.ce.gatech.edu/enveomics/).
 
 
-Selected sequences were then filtered using the "FastA.filter.pl" script from enveomics (http://enve-omics.ce.gatech.edu/enveomics/) and then, the general procedure explained above was followed. However, in this case on step 5, instead of the script "Plot_ANI_vs_Perc_shared_genome.R", the script "Processing_script_ncbi_Sars-Cov2_CDC_USA"
-was employed.
+Selected sequences were then filtered using the "FastA.filter.pl" script from enveomics (http://enve-omics.ce.gatech.edu/enveomics/) and then, the general procedure explained above was followed. However, in this case, on step 5, instead of the script "Plot_ANI_vs_Perc_shared_genome.R", the script "Processing_script_ncbi_Sars-Cov2_CDC_USA" was employed to plot histograms with and without the variant data.
+
