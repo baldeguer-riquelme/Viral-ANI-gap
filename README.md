@@ -49,7 +49,9 @@ Plots for each species can be found in folders "Plots_prokaryotic_viruses", "Plo
 
 
 ### Bootstrapped subsampling and peak detection
-1. The script "Bootstrap_peak_detector.py" uses the "ani_table_final_sp_included.txt" file (outputted by the "Species_from_ani_table.R" script) as input. It performs a random subsampling of the data to get the same number of pairs per species and identify peaks and valleys. This process is repeated 1,000 times, the results are pooled and then plotted. The output is a pdf called "Bootstrap_plot.pdf", with two plots: at the bottom, the ANI values distribution and the positions of the peaks and valleys; at the top, an histogram displaying the number of times each peak and valley was detected.
+1. The script "Bootstrap_peak_detector.py" uses the "ani_table_final_sp_included.txt" file (outputted by the "Species_from_ani_table.R" script) as input.
+2. It performs a random subsampling of the data to get the same number of pairs per species and identify peaks and valleys. This process is repeated 1,000 times, the results are pooled and then plotted.
+3. The output is a pdf called "Bootstrap_plot.pdf", with two plots: at the bottom, the ANI values distribution and the positions of the peaks and valleys; at the top, an histogram displaying the number of times each peak and valley was detected.
 
 
 ### Classification of species on 4 groups
