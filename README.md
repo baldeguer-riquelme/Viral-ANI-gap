@@ -51,23 +51,23 @@ Plots for each species can be found in folders "Plots_prokaryotic_viruses", "Plo
 ### Bootstrapped subsampling and peak detection
 The script "Bootstrap_peak_detector.py" uses the "ani_table_final_sp_included.txt" file (outputted by the "Species_from_ani_table.R" script) as input and does the following steps:
 
-1. It performs a random subsampling of the data to get the same number of pairs per species and identify peaks and valleys. This process is repeated 1,000 times, the results are pooled and then plotted.
+1.1 It performs a random subsampling of the data to get the same number of pairs per species and identify peaks and valleys. This process is repeated 1,000 times, the results are pooled and then plotted.
      
-2. The output is a pdf called "Bootstrap_plot.pdf", with two plots: at the bottom, the ANI values distribution and the positions of the peaks and valleys; at the top, an histogram displaying the number of times each peak and valley was detected.
+1.2 The output is a pdf called "Bootstrap_plot.pdf", with two plots: at the bottom, the ANI values distribution and the positions of the peaks and valleys; at the top, an histogram displaying the number of times each peak and valley was detected.
 
 
 ### Classification of species on 4 groups
 The script "Peak_detector.py" uses the "ani_table_final_sp_included.txt" file (outputted by the "Species_from_ani_table.R" script) as input and does the following steps:
 
-1. For each species, the script extracts and smooth the data using the gaussian_kde function of the scipy package.
+1.1 For each species, the script extracts and smooth the data using the gaussian_kde function of the scipy package.
      
-2. Then, it assess normality and unimodality using the D’Agostino and Pearson’s test and Hartigan’s dip test, respectively.
+1.2 Then, it assess normality and unimodality using the D’Agostino and Pearson’s test and Hartigan’s dip test, respectively.
      
-3. The smooth data is used to identify peaks and valleys with the function find_peaks() of the scipy package.
+1.3 The smooth data is used to identify peaks and valleys with the function find_peaks() of the scipy package.
      
-4. These results are integrated and the species is classified into one of the four groups described in the paper. The result is printed to stdout.
+1.4 These results are integrated and the species is classified into one of the four groups described in the paper. The result is printed to stdout.
      
-5. Finally, it produces a pdf named "Peak_Valley_per_species.pdf" with plots for all species which includes the original data histogram, smoothed distribution, peaks and valleys detected, p-values of normality and unimodality tests (top-right) and the group the species belong to (top-left, below species name).
+1.5 Finally, it produces a pdf named "Peak_Valley_per_species.pdf" with plots for all species which includes the original data histogram, smoothed distribution, peaks and valleys detected, p-values of normality and unimodality tests (top-right) and the group the species belong to (top-left, below species name).
 
 
 ### SARS-CoV-2
