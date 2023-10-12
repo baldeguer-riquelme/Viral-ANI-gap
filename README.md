@@ -59,7 +59,7 @@ The script "Bootstrap_peak_detector.py" uses the "ani_table_final_sp_included.tx
 ### Classification of species on 4 groups
 The script "Peak_detector.py" uses the "ani_table_final_sp_included.txt" file (outputted by the "Species_from_ani_table.R" script) as input and does the following steps:
 
-     1. For each species, the script extracts and smooth the data using the gaussian_kde function of the scipy package.
+1. For each species, the script extracts and smooth the data using the gaussian_kde function of the scipy package.
      
      2. Then, it assess normality and unimodality using the D’Agostino and Pearson’s test and Hartigan’s dip test, respectively.
      
