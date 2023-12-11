@@ -1,5 +1,5 @@
 ### ANI distribution of SARS-CoV-2 genomes sequenced at Robert Kock Institute (Germany). 
 
-![alt text](https://github.com/baldeguer-riquelme/Viral-ANI-gap/blob/main/Viral-ANI-gap/Plots_SARS-CoV-2_RKI/FigureS7.tiff)
+![alt text](https://github.com/baldeguer-riquelme/Viral-ANI-gap/blob/main/Viral-ANI-gap/Plots_SARS-CoV-2_RKI/Figure_SARS-CoV-2_RKI.png)
 
 ANI histograms of the SARS-CoV-2 genomes sequenced at the RKI in Germany. A) Histogram with a random subset of 1,506 genomes (Ns allowed) belonging to the Alpha (n=300), Beta (n=300), Delta (n=300), Gamma (n=300), Epsilon (n=6) and Omicron (n=300) VOCs were analyzed, that is 2,266,530 pairs in total. A subtle ANI gap at around 99.8% can be observed (see vertical line). B) Histogram with 1,314 high-quality genomes (i.e., without Ns) belonging to the Alpha (n=300), Beta (n=300), Delta (n=300), Gamma (n=112), Epsilon (n=2) and Omicron (n=300) VOCs were analyzed, that is 1,725,282 pairs in total. After removing genomes with Ns, the data reveal a clearer bimodal distribution and a more pronounced ANI gap for the SARS-CoV-2 genomes. C) Histogram shows the same data as in B but sorted by the type of comparison (between the same or different variants). Note that pairs between different variants and between the same variant overlap in their ANI values with the lower peak and higher peak, respectively.
