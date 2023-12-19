@@ -19,7 +19,7 @@ Viral genomes were retrieved from NCBI and â€œThe Actinobacteriophage Databaseâ€
 
 4. Genome length was calculated using the enveomics script FastA.length.pl (http://enve-omics.ce.gatech.edu/enveomics/docs?t=FastA.length.pl):
 
-```FastA.length.pl viral_genomes.fasta > Length_viruses.txt
+```FastA.length.pl viral_genomes.fasta > Length_viruses.txt```
 
 5. Output generated on step 3 by fastANI (ani_table) and on step 4 by FastA.length (Length_viruses.txt) were then used as input for the script "Species_from_ani_table.R" which does the following steps:
    
