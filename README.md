@@ -7,7 +7,7 @@ Viral genomes were retrieved from NCBI and â€œThe Actinobacteriophage Databaseâ€
 ### General procedure
 1. Independent viral genome sequences were placed in a folder named fastaperfile/ using the enveomics script FastA.per_file.pl (http://enve-omics.ce.gatech.edu/enveomics/docs?t=FastA.per_file.pl)
 
-     FastA.per_file ./fastaperfile/ viral_genomes.fasta
+     'FastA.per_file ./fastaperfile/ viral_genomes.fasta'
 
 
 2. A file with the path to each viral genomes was generated using:
