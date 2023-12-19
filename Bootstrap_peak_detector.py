@@ -25,7 +25,6 @@ def rand_subsamp(table_filt):
         if len(table_sp) > 150:
             sub=table_sp.sample(n=150)
             df_subset=df_subset.append(sub)
-    #print(len(df_subset['Species'].unique()))
     round_df=df_subset['ANI'].round(1)
     average_ANI=round_df.mean()
     pivot=round_df.value_counts().to_frame()
@@ -69,42 +68,46 @@ def bootstrap(iter, table):
     return(list_peaks,list_valleys)
 
 
-#Read table
-table=pd.read_table("ani_table_final_sp_included.txt", header=None,delimiter="\t")
+def main():
+    #Read table
+    table=pd.read_table("ani_table_final_sp_included.txt", header=None,delimiter="\t")
+    table.columns=["Seq1","Seq2","ANI","Frag_used","Frag_total","Length_Seq1","Length_Seq2","Perc_genome_shared","Species"]
 
-table.columns=["Seq1","Seq2","ANI","Frag_used","Frag_total","Species"]
+    #Filter by identity and remove self-hits
+    table_filt = table[(table['ANI'] >= 95) & (table['Seq1'] != table['Seq2'])] # Filter hits by ANI. I observed that there are many pair around 92-94% ANI for some species, so I decided to show pairs up to 90%.
 
-#Filter by identity and remove self-hits
-table_filt = table[(table['ANI'] >= 95) & (table['Seq1'] != table['Seq2'])] # Filter hits by ANI. I observed that there are many pair around 92-94% ANI for some species, so I decided to show pairs up to 90%.
+    #Random subsample and smooth data
+    pivot, pivot_smooth = rand_subsamp(table_filt) # Random subsampling to plot
+    average_freq=pivot_smooth['Freq_smooth'].mean() # Average frequency of the smoothed data
+    list_peaks, list_valleys = bootstrap(1000, table_filt) # Perform bootstrap analysis. Subsample x number of times and find valleys and peaks
 
-#Random subsample and smooth data
-pivot, pivot_smooth = rand_subsamp(table_filt) # Random subsampling to plot
-average_freq=pivot_smooth['Freq_smooth'].mean() # Average frequency of the smoothed data
-list_peaks, list_valleys = bootstrap(1000, table_filt) # Perform bootstrap analysis. Subsample x number of times and find valleys and peaks
+    #Plot figures
+    p=PdfPages("Bootstrap_plot.pdf")
 
-#Plot figures
-p=PdfPages("Bootstrap_plot.pdf")
+    figure, axis = plt.subplots(2, 1, figsize=(15, 15))
 
-figure, axis = plt.subplots(2, 1, figsize=(15, 15))
+    axis[0].hist(list_valleys, range=[95, 100], bins=51, color="palegreen", edgecolor="black", label="Valleys")
+    axis[0].hist(list_peaks, range=[95, 100], bins=51, color="deepskyblue", edgecolor="black", label="Peaks")
+    axis[0].set_xlabel("ANI", fontsize=18)
+    axis[0].set_ylabel("Number of bootstraps", fontsize=18)
+    axis[0].tick_params(axis='both', labelsize=18)
+    axis[0].legend(loc="upper left", fontsize=18, bbox_to_anchor=(1, 1))
 
-axis[0].hist(list_valleys, range=[95, 100], bins=51, color="palegreen", edgecolor="black", label="Valleys")
-axis[0].hist(list_peaks, range=[95, 100], bins=51, color="deepskyblue", edgecolor="black", label="Peaks")
-axis[0].set_xlabel("ANI", fontsize=18)
-axis[0].set_ylabel("Number of bootstraps", fontsize=18)
-axis[0].tick_params(axis='both', labelsize=18)
-axis[0].legend(loc="upper left", fontsize=18, bbox_to_anchor=(1, 1))
+    axis[1].plot(pivot_smooth['ANI'], pivot_smooth['Freq_smooth']*((pivot['Freq'].max() / pivot_smooth['Freq_smooth'].max())/2), '-', color="sandybrown", label='Smooth', linewidth=3)
+    axis[1].bar(pivot['ANI'],pivot['Freq'], width=0.05, color="deepskyblue", edgecolor="grey", label='Original')
+    axis[1].vlines(x=list_valleys, ymin=0,ymax=pivot['Freq'].max(),linestyles ="dotted", colors="palegreen", label="Valleys", linewidth=2)
+    axis[1].vlines(x=list_peaks, ymin=0,ymax=pivot['Freq'].max(),linestyles ="dashdot",colors="deepskyblue",label="Peaks", linewidth=2)
+    axis[1].hlines(y=average_freq * ((pivot['Freq'].max() / pivot_smooth['Freq_smooth'].max())/2) ,xmin=95,xmax=100,linestyles ="dashed",colors="black",label="Average", linewidth=2)
+    axis[1].set_xlabel("ANI", fontsize=18)
+    axis[1].set_ylabel("Frequency", fontsize=18)
+    axis[1].tick_params(axis='both', labelsize=18)
+    axis[1].legend(loc="upper left", fontsize=18, bbox_to_anchor=(1, 1))
 
-axis[1].plot(pivot_smooth['ANI'], pivot_smooth['Freq_smooth']*((pivot['Freq'].max() / pivot_smooth['Freq_smooth'].max())/2), '-', color="sandybrown", label='Smooth', linewidth=3)
-axis[1].bar(pivot['ANI'],pivot['Freq'], width=0.05, color="deepskyblue", edgecolor="grey", label='Original')
-axis[1].vlines(x=list_valleys, ymin=0,ymax=pivot['Freq'].max(),linestyles ="dotted", colors="palegreen", label="Valleys", linewidth=2)
-axis[1].vlines(x=list_peaks, ymin=0,ymax=pivot['Freq'].max(),linestyles ="dashdot",colors="deepskyblue",label="Peaks", linewidth=2)
-axis[1].hlines(y=average_freq * ((pivot['Freq'].max() / pivot_smooth['Freq_smooth'].max())/2) ,xmin=95,xmax=100,linestyles ="dashed",colors="black",label="Average", linewidth=2)
-axis[1].set_xlabel("ANI", fontsize=18)
-axis[1].set_ylabel("Frequency", fontsize=18)
-axis[1].tick_params(axis='both', labelsize=18)
-axis[1].legend(loc="upper left", fontsize=18, bbox_to_anchor=(1, 1))
+    plt.savefig(p, format="pdf", bbox_inches="tight")
+    plt.close()
 
-plt.savefig(p, format="pdf", bbox_inches="tight")
-plt.close()
+    p.close()
 
-p.close()
+
+if __name__ == '__main__':
+    main()

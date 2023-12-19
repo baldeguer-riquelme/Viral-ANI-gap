@@ -121,7 +121,7 @@ def analyze_sp(species, table, pdf):
 
 def main():
     table=pd.read_table("ani_table_final_sp_included.txt", header=None,delimiter="\t")
-    table.columns=["Seq1","Seq2","ANI","Frag_used","Frag_total","Species"]
+    table.columns=["Seq1","Seq2","ANI","Frag_used","Frag_total","Length_Seq1","Length_Seq2","Perc_genome_shared","Species"]
     table_filt = table[(table['ANI'] >= 90) & (table['Seq1'] != table['Seq2'])] # Filter hits by ANI. I observed that there are many pair around 92-94% ANI for some species, so I decided to show pairs up to 90%.
     p = PdfPages("Peak_Valley_per_species.pdf")
     print("Species\tGroup\tavg_ANI\tpval_normaltest\tpval_diptest\tValley_smooth\tValley_smooth_in_gap\tPeak_smooth\tPeak_smooth_in_gap\t")

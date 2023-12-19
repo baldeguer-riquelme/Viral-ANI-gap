@@ -41,39 +41,17 @@ plotting <- function (tabla, species) {
 }
 
 
-setwd("/storage/home/hcoda1/7/briquelme3/scratch/ANI_virus/LongReads_SRA/To_analyze")
+#setwd() if needed
+
 cat(paste("[",Sys.time(),"]"," Reading ANI table\n"))
 data<-read.table("ani_table_final_sp_included.txt",dec=".",sep="\t",row.names=NULL) #Table with species information. Obtained with Rscript "Species_from_ani_table"
 colnames(data)<-c("Seq1","Seq2","ANI","Frags_used","Num_total_frags","Length_Seq1","Length_Seq2", "Perc_genome_shared","Species")
-
-min_num_genomes=20 # Minimum number of genomes per species. 20 for isolated viruses, 10 for uncultured viruses (fosmid and long-reads).
-cat(paste("[",Sys.time(),"]","Identifying species with more than", min_num_genomes, "genomes","\n"))
-
-setDT(data)
-Num_strain_per_sp_min10<-data.frame(Species=character(0))
-for (sp in unique(data$Species)){
-  #test<-subset(data, Species == sp)
-  test <- data[Species == sp, ]
-  column1<-as.data.frame(test$Seq1)
-  column2<-as.data.frame(test$Seq2)
-  colnames(column1)<-c("column")
-  colnames(column2)<-c("column")
-  column<-add_row(column1, column2)
-  unicos<-unique(column)
-  if (length(unicos$column) >= min_num_genomes){
-    Num_strain_per_sp_min10$Species<-as.character(Num_strain_per_sp_min10$Species)
-    Num_strain_per_sp_min10[nrow(Num_strain_per_sp_min10) + 1,] = c(sp)
-    cat(paste(length(unicos$column)," strains in ", sp,"*\n",sep=""))
-  } else{
-    cat(paste(length(unicos$column)," strains in ", sp,"\n",sep=""))}
-}
-colnames(Num_strain_per_sp_min10)<-c("Species")
 
 #Plot individual species
 cat(paste("[",Sys.time(),"]","Plotting individual species plots","\n"))
 npairs_min=100
 npairs_max=1000000
-for (sp in Num_strain_per_sp_min10$Species){ 
+for (sp in unique(data$Species)){ 
   plot_data<- data %>% filter(Species == sp)
   plot_data <- as.data.frame(plot_data)
   if (length(plot_data$Seq1) > npairs_min & length(plot_data$Seq1) < npairs_max) {
@@ -91,7 +69,7 @@ x=0
 while (x < 2) { 
   npairs=100
   plot_data<-data.frame()
-  for (sp in Num_strain_per_sp_min10$Species){ 
+  for (sp in unique(data$Species)){ 
     sp_data<-data %>% filter(Species == sp)
     if (length(sp_data$Seq1) >= npairs){
       random_data<-sample_n(sp_data, npairs)

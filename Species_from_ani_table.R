@@ -7,7 +7,7 @@ library(igraph)
 library(ggpubr)
 library(data.table)
 
-setwd("/storage/home/hcoda1/7/briquelme3/scratch/ANI_virus/LongReads_SRA/To_analyze")
+# setwd() if needed
 
 cat(paste("[",Sys.time(),"]","Reading ANI table\n"))
 data<-read.table("ani_table",dec=".",sep="\t",row.names=NULL) #fastANI output table (all vs all)
@@ -67,7 +67,31 @@ df_final<-rbindlist(l=res_sp)
 df_final_derep <- df_final %>% distinct() #Remove duplicated rows
 df_final_derep2 <- subset(df_final_derep, Seq1 != Seq2) #Remove rows with self hits
 
+min_num_genomes=20 # Minimum number of genomes per species. 20 for isolated viruses, 10 for uncultured viruses (fosmid and long-reads).
+cat(paste("[",Sys.time(),"]","Identifying species with more than", min_num_genomes, "genomes","\n"))
+
+setDT(df_final_derep2)
+Num_strain_per_sp_min10<-data.frame(Species=character(0))
+for (sp in unique(df_final_derep2$Species)){
+  test <- df_final_derep2[Species == sp, ]
+  column1<-as.data.frame(test$Seq1)
+  column2<-as.data.frame(test$Seq2)
+  colnames(column1)<-c("column")
+  colnames(column2)<-c("column")
+  column<-add_row(column1, column2)
+  unicos<-unique(column)
+  if (length(unicos$column) >= min_num_genomes){
+    Num_strain_per_sp_min10$Species<-as.character(Num_strain_per_sp_min10$Species)
+    Num_strain_per_sp_min10[nrow(Num_strain_per_sp_min10) + 1,] = c(sp)
+    cat(paste(length(unicos$column)," strains in ", sp,"*\n",sep=""))
+  } else{
+    cat(paste(length(unicos$column)," strains in ", sp,"\n",sep=""))}
+}
+colnames(Num_strain_per_sp_min10)<-c("Species")
+
+df_final_derep_min20 <- df_final_derep2 %>% filter(Species %in% Num_strain_per_sp_min10$Species)
+
 cat(paste("[",Sys.time(),"]","Writing table\n"))
-write.table(df_final_derep2, file="ani_table_final_sp_included.txt",sep="\t", col.names=F,row.names = F,quote = F)
+write.table(df_final_derep_min20, file="ani_table_final_sp_included.txt",sep="\t", col.names=F,row.names = F,quote = F)
 
 cat(paste("[",Sys.time(),"]","All done\n"))
