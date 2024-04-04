@@ -61,19 +61,17 @@ The script "Bootstrap_analysis.R" uses the "ani_table_final_sp_included.txt" fil
 
 
 ### Species classification into 4 groups
-The script "Peak_detector.py" uses the "ani_table_final_sp_included.txt" file (outputted by the "Species_from_ani_table.R" script) as input and does the following steps:
+The script "Find_peak_valleys.R" uses the "ani_table_final_sp_included.txt" file (outputted by the "Species_from_ani_table.R" script) as input and does the following steps:
 
-1.1 For each species, the script extracts and smooth the data using the gaussian_kde function of the scipy package.
+1.1 For each species, the script extracts and smooth the data using the smooth_data function of the gcplyr R package.
      
-1.2 Then, it assess normality and unimodality using the D’Agostino and Pearson’s test and Hartigan’s dip test, respectively.
+1.2 The smooth data is used to identify peaks and valleys with the function findpeaks() of the pracma R package.
      
-1.3 The smooth data is used to identify peaks and valleys with the function find_peaks() of the scipy package.
+1.3 These results are integrated and the species is classified into one of the four groups described in the paper. The result is printed to stdout and saved in a tab-delimited table named "Peak_valleys_per_sp.txt".
      
-1.4 These results are integrated and the species is classified into one of the four groups described in the paper. The result is printed to stdout.
-     
-1.5 Finally, it produces a pdf named "Peak_Valley_per_species.pdf" with plots for all species which includes the original data histogram, smoothed distribution, peaks and valleys detected, p-values of normality and unimodality tests (top-right) and the group the species belong to (top-left, below species name).
+1.4 Finally, it produces a pdf named "Species_classification_plots.pdf" with plots for all species which includes the original data histogram, smoothed distribution, peaks and valleys detected and the group the species belong to (top-left, below species name).
 
-```python Peak_detector.py```
+```Rscript Find_peak_valleys.R```
 
 ### SARS-CoV-2
 SARS-CoV-2 genomes were downloaded from NCBI as well as their associated metadata. Since the amount of genomes is too big, a subset of sequences were selected using the script "SARS-CoV-2_select_genomes.R". This script was used to:
